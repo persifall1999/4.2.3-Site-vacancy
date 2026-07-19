@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import type { RootState } from "./store";
 
 export interface ITVacancy {
     id: number;
@@ -49,7 +50,7 @@ export const jobsFetch = createAsyncThunk<{jobs: ITVacancy[], pagination: ITPagi
     'jobs/jobsSlice',
     async function (_, {rejectWithValue, getState}) {
         try {
-            const { search, city, skills, currentPage } = getState().jobs;
+            const { search, city, skills, currentPage } = (getState() as RootState).jobs;
             const url = new URL('https://kata-jobs.onrender.com/api/jobs');
 
             url.searchParams.append('page', currentPage.toString())

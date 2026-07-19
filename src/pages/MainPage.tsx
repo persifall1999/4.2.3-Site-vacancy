@@ -1,5 +1,5 @@
-import { Header } from "../modules/Header"
-import { ListVacancy } from "../modules/ListVacancy"
+import { Header } from "../modules/Header/Header"
+import { ListVacancy } from "../modules/ListVacancy/ListVacancy"
 
 export const MainPage = () => {
     return (

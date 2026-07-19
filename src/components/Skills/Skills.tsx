@@ -1,7 +1,8 @@
 import { ActionIcon, Group, Paper, Pill, Stack, Text, TextInput, useMantineTheme } from "@mantine/core";
 import { useState } from "react"
-import { useAppDispatch, useAppSelector } from "../store/store";
-import { addSkill, removeSkill } from "../store/jobsSlice";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { addSkill, removeSkill } from "../../store/jobsSlice";
+import styles from './Skills.module.scss'
 
 export const Skills = () => {
     const theme = useMantineTheme();
@@ -30,10 +31,7 @@ export const Skills = () => {
     };
 
     return (
-        <Paper p={24} radius={12} style={{
-            backgroundColor: '#FFFFFF',
-            width: '100%',
-        }}>
+        <Paper p={24} radius={12} className={styles.paperSkills} >
             <Stack gap="sm">
                 <Text fw={600} size="14px" style={{
                     color: theme.colors.black1[0]
@@ -41,23 +39,18 @@ export const Skills = () => {
                     Ключевые навыки
                 </Text>
                 
-                <Group gap={8} wrap="nowrap" style={{ width: '100%' }}>
+                <Group gap={8} wrap="nowrap" className={styles.inputGroup}>
                     <TextInput 
                         placeholder="Навык"
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         onKeyDown={handleKeyDown}
                         size="xs"
-                        style={{ flex: 1 }}
+                        className={styles.textInput}
                         styles={{
                             input: {
-                                borderRadius: '8px',
-                                borderColor: '#0F0F1033',
-                                borderWidth: '1px',
-                                height: '30px',
-                                color: theme.colors.black1[0],
-                                backgroundColor: '#FFFFFF',
-                                paddingRight: '12px', 
+                                className: styles.customInput,
+                                color: theme.colors.black1[0], 
                                 '&:focus': {
                                     borderColor: theme.colors.indigo[6],
                                 }
@@ -68,30 +61,15 @@ export const Skills = () => {
                     <ActionIcon 
                         radius="md" 
                         onClick={handleAddSkill}
-                        style={{
-                            backgroundColor: '#228BE6',
-                            opacity: '0.5',
-                            height: '30px',
-                            width: '34px',
-                            flexShrink: 0,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
+                        className={styles.actionIcon}
                     >
-                        <Text style={{
-                            color: '#FFFFFF', 
-                            fontSize: '34px',
-                            fontWeight: '100',
-                            lineHeight: 1,
-                            display: 'inline-block',
-                        }}>
+                        <Text className={styles.actionText} >
                             +
                         </Text>
                     </ActionIcon>
                 </Group>
 
-                <Group gap={6} wrap="wrap" style={{marginTop: '6px'}}>
+                <Group gap={6} wrap="wrap" className={styles.groupPills} >
                     {skills.map((skill) => (
                         <Pill 
                             key={skill}
@@ -99,20 +77,18 @@ export const Skills = () => {
                             onRemove={() => {handleRemoveSkill(skill)}}
                             styles={{
                                 root: {
-                                    backgroundColor: '#F6F6F7',
-                                    borderRadius: '99px',
-                                    padding: '2px 4px 2px 12px', 
-                                    height: 'auto'
+                                    padding: '2px 4px 2px 12px',
+                                    height: 'auto',
                                 },
                                 label: {
                                     color: theme.colors.black1[0],
+                                    marginRight: '3px',
                                     fontSize: '12px',
                                     fontWeight: '400',
-                                    marginRight: '3px',
                                 },
                                 remove: {
-                                    color: '#0F0F104D',
                                     padding: '3px',
+                                    color: '#0F0F104D',
                                 }
                             }}
                         >

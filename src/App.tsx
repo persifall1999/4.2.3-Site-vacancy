@@ -1,17 +1,14 @@
 import '@mantine/core/styles.css';
 import { Box, MantineProvider, useMantineTheme } from '@mantine/core'
-import './App.scss'
 import { theme } from './theme'
 import { MainPage } from './pages/MainPage'
+import styles from './App.module.scss'
 
 function AppContent() {
   const theme = useMantineTheme();
   
   return (
-    <Box style={{
-      backgroundColor: theme.colors.appBackground[0],
-      minHeight: '100vh'
-    }}>
+    <Box className={styles.mainPageBox} style={{ backgroundColor: theme.colors.appBackground[0] }}>
       <MainPage />
     </Box>
   )

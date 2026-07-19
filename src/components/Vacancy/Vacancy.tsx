@@ -1,5 +1,7 @@
 import { Badge, Button, Group, Paper, Stack, Text, useMantineTheme } from "@mantine/core"
-import type { ITVacancy } from "../store/jobsSlice"
+import type { ITVacancy } from "../../store/jobsSlice";
+import styles from './Vacancy.module.scss'
+
 
 interface VacancyProps {
     vacancy: ITVacancy;
@@ -21,62 +23,45 @@ export const Vacancy = ({vacancy}: VacancyProps) => {
     }
 
     return (
-        <Paper style={() => ({
-            backgroundColor: '#FFFFFF',
-            width: '100%',
-            height: '248px',
-            borderRadius: '12px',
-            padding: '24px'
-        })}>
+        <Paper className={styles.paperVacancy} >
             
             <Stack gap={6}>
 
-                <Text size="20px" fw={600} style={{
-                    color: theme.colors.indigo[6],
-                    cursor: 'pointer'
-                }}>
+                <Text size="20px" fw={600} className={styles.vacancyText} style={{
+                    color: theme.colors.indigo[6]
+                }} >
                     {vacancy.name}
                 </Text>
 
-                <Group gap={16} style={{marginTop: '6px'}}>
+                <Group gap={16} className={styles.experiencePrice} >
                     <Text fw={400} size="16px" style={{color: theme.colors.black1[0]}}>
                         {formatSalary(vacancy.salary)}
                     </Text>
-                    <Text size="14px" fw={400} style={{color: '#0F0F1080'}}>
+                    <Text size="14px" fw={400} className={styles.vacancyExperience} >
                         Опыт {vacancy.experience}
                     </Text>
                 </Group>
 
-                <Text size="14px" fw={400} style={{color: '#0F0F1080', marginTop: '18px'}}>
+                <Text size="14px" fw={400} className={styles.companyVacancy} >
                     {vacancy.company_name}
                 </Text>
 
                 <Group mt={6}>
-                    <Badge variant="filled" size="xs" radius="xs" style={{
+                    <Badge variant="filled" size="xs" radius="xs" className={styles.vacancySpace} style={{
                         backgroundColor: theme.colors.indigo[6],
-                        color: '#FFFFFF',
-                        fontWeight: '700',
-                        height: '16px',
-                        textTransform: 'uppercase',
-                        padding: '6px 5px 6px 5px'
                     }}>
                         {spaceLabels[vacancy.space] || vacancy.space}
                     </Badge>
                 </Group>
 
-                <Text size="16px" fw={400} style={{ color: '#0F0F10', marginTop: '4px'}}>
+                <Text size="16px" fw={400} className={styles.vacancyCity} >
                     {vacancy.city}
                 </Text>
 
                 <Group mt="md">
-                    <Button radius="sm" size="sm" style={{
+                    <Button radius="sm" size="sm" className={styles.buttonWatchVacancy} style={{
                         backgroundColor: theme.colors.black1[0],
-                        color: '#FFFFFF',
-                        fontSize: '14px',
-                        fontWeight: '400',
-                        height: '34px',
-                        padding: '0 18px',
-                    }} onClick={(e) => e.preventDefault()}>
+                    }}  onClick={(e) => e.preventDefault()}>
                         Смотреть вакансию
                     </Button>
                 </Group>
