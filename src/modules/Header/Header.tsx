@@ -13,7 +13,7 @@ export const Header = () => {
 
                     <Group gap={10} className={styles.logoGroup} >
                         <img
-                            src="/logo.png"
+                            src="./logo.png"
                             alt="hh logo"
                             className={styles.logoImg}
                         />
