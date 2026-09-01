@@ -9,7 +9,7 @@ import { HashRouter } from 'react-router-dom'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/4.2.3-Site-vacancy">
         <App />
       </BrowserRouter>
     </Provider>
