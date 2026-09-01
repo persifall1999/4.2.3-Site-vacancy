@@ -1,8 +1,8 @@
-name: Deploy Vite site to Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # или "master" (укажите имя вашей главной ветки)
+    branches: [ main ] # Скрипт сработает при каждом пуше в ветку main
 
 permissions:
   contents: read
@@ -10,8 +10,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -32,16 +32,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build project
         run: npm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # указываем папку сборки Vite
+          path: './dist' # Папка, куда Vite собирает готовый проект
 
       - name: Deploy to GitHub Pages
         id: deployment
