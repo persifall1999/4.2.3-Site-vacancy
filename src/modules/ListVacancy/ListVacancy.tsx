@@ -7,16 +7,27 @@ import { Skills } from "../../components/Skills/Skills";
 import { Towns } from "../../components/Towns/Towns";
 import { Vacancy } from "../../components/Vacancy/Vacancy";
 import styles from './ListVacancy.module.scss'
+import { useSearchParams } from "react-router-dom";
 
 export const ListVacancy = () => {
     const dispatch = useAppDispatch();
-    const theme = useMantineTheme()
+    const theme = useMantineTheme();
+    const [, setSearchParams] = useSearchParams();
 
     const { list, pagination, loading, error, currentPage, search, city, skills } = useAppSelector((state) => state.jobs);
 
     useEffect(() => {
-        dispatch(jobsFetch())
-    }, [dispatch, currentPage, search, city, skills]);
+
+        const params: Record<string, string> = {};
+        if (search.trim()) params.search = search.trim();
+        if (city && city !== "Все города") params.city = city;
+        if (skills.length > 0) params.skills = encodeURIComponent(skills.join(","));
+        if (currentPage > 1) params.page = currentPage.toString();
+
+        setSearchParams(params);
+
+        dispatch(jobsFetch());
+    }, [dispatch, currentPage, search, city, skills, setSearchParams]);
 
     const handlePageChange = (page: number) => {
         dispatch(setCurrentPage(page));

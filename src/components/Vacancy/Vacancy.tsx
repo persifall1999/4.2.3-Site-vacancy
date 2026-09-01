@@ -1,6 +1,7 @@
 import { Badge, Button, Group, Paper, Stack, Text, useMantineTheme } from "@mantine/core"
 import type { ITVacancy } from "../../store/jobsSlice";
 import styles from './Vacancy.module.scss'
+import { Link } from "react-router-dom";
 
 
 interface VacancyProps {
@@ -29,7 +30,7 @@ export const Vacancy = ({vacancy}: VacancyProps) => {
 
                 <Text size="20px" fw={600} className={styles.vacancyText} style={{
                     color: theme.colors.indigo[6]
-                }} >
+                }} component={Link} to={`/vacancies/${vacancy.id}`} >
                     {vacancy.name}
                 </Text>
 
@@ -59,9 +60,9 @@ export const Vacancy = ({vacancy}: VacancyProps) => {
                 </Text>
 
                 <Group mt="md">
-                    <Button radius="sm" size="sm" className={styles.buttonWatchVacancy} style={{
+                    <Button component={Link} to={`/vacancies/${vacancy.id}`} radius="sm" size="sm" className={styles.buttonWatchVacancy} style={{
                         backgroundColor: theme.colors.black1[0],
-                    }}  onClick={(e) => e.preventDefault()}>
+                    }} >
                         Смотреть вакансию
                     </Button>
                 </Group>
