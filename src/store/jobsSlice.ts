@@ -41,26 +41,13 @@ interface JobState {
 
 const getUrlParams = () => {
     if (typeof window === 'undefined') return { search: '', city: 'Все города', skills: ['JavaScript', 'React', 'Redux', 'Python'], page: 1 };
-    
-    let searchString = window.location.search;
-    const params = new URLSearchParams(searchString);
-    
-    if (params.has('p')) {
-        const pValue = params.get('p') || '';
-        
-        const restoredPath = pValue.replace(/~and~/g, '&');
-        
-        if (restoredPath.includes('?')) {
-            searchString = '?' + restoredPath.split('?')[1];
-        }
-    }
 
-    const finalParams = new URLSearchParams(searchString);
-    const urlSearch = finalParams.get('search') || '';
-    const urlCity = finalParams.get('city') || 'Все города';
-    const urlPage = parseInt(finalParams.get('page') || '1', 10);
-    
-    const urlSkillsRaw = finalParams.get('skills');
+    const params = new URLSearchParams(window.location.search);
+    const urlSearch = params.get('search') || '';
+    const urlCity = params.get('city') || 'Все города';
+    const urlPage = parseInt(params.get('page') || '1', 10);
+
+    const urlSkillsRaw = params.get('skills');
     const urlSkills = urlSkillsRaw 
         ? decodeURIComponent(urlSkillsRaw).split(',').filter(Boolean)
         : ['JavaScript', 'React', 'Redux', 'Python'];
